@@ -2,15 +2,15 @@ import json
 import os
 import numpy as np
 import pandas as pd
-json_files = []
 
-input_texts = []
-target_texts = []
+json_files = []
 
 for each_json_file in os.listdir(files_path):
     if each_json_file.endswith('.json'):
         json_files.append(each_json_file)
 
+input_texts = []
+target_texts = []
 
 for each_file in json_files:
     file = json.load(open(each_file, 'r'))
@@ -20,8 +20,8 @@ for each_file in json_files:
         for dialog in dictionary['dialog']:
             temp_list.append((dialog['sender'], dialog['text']))
         text_data.append(temp_list)
-    for each_line in text_data:
-        for each_message in each_line:
+    for each_sent in text_data:
+        for each_message in each_sent:
             #print(each_message)
             if each_message[0] == 'participant1':
                 #print(each_message)
