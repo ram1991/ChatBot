@@ -1,5 +1,4 @@
 
-from keras.models import Sequential
 from keras.models import Model
 from gensim.models import KeyedVectors
 from keras.preprocessing.text import Tokenizer
