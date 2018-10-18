@@ -5,7 +5,6 @@ from keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 from keras.layers import Dense, Input, LSTM, Embedding, Dropout, Activation,RepeatVector, TimeDistributed, Bidirectional
 from keras.layers.merge import concatenate
-from keras.models import Model
 from keras.layers.normalization import BatchNormalization
 from keras.callbacks import EarlyStopping, ModelCheckpoint
 from keras.optimizers import SGD
