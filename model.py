@@ -54,4 +54,17 @@ decoder_outputs = decoder_dense_layer(decoder_outputs)
 decoder_model = Model([decoder_inputs] + decoder_input_states,
                       [decoder_outputs] + decoder_states)
 
+#model visualization
+
+
+from keras.utils.vis_utils import plot_model
+plot_model(model, to_file = 'model.png',show_shapes = True, show_layer_names = True)
+
+from IPython.display import Image
+Image('model.png')
+
+#from IPython.display import SVG
+#from keras.utils.vis_utils import model_to_dot
+#SVG(model_to_dot(model).create(prog='dot', format='svg'))
+
 
