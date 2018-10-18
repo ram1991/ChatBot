@@ -37,7 +37,7 @@ model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = [
 
 model.fit([encoder_input_data, decoder_input_data],decoder_target_data, epochs = 1000, batch_size = 128)
 
-
+#inference model
 
 encoder_model = Model(encoder_inputs, encoder_states)
 decoder_state_input_h = Input(shape =(embedding_dim,))
