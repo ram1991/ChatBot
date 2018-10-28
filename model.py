@@ -113,6 +113,25 @@ decoder_outputs = decoder_dense_layer(decoder_outputs)
 decoder_model = Model([decoder_inputs] + decoder_input_states,
                       [decoder_outputs] + decoder_states)
 
+
+#using gru
+encoder_inputs = Input(shape = (max_len,), name = 'encoder_inputs')
+encoder_input_embeddings = Embedding(input_dim = nb_words, output_dim = 300,weights = [embedding_matrix], name = 'encoder_embedding_layer', trainable = True)(encoder_inputs)
+encoder_outputs, state_h = GRU(250, name = 'encoder_gru', return_state = True)(encoder_input_embeddings)
+
+
+decoder_inputs = Input(shape = (max_len,), name = 'decoder_inputs')
+decoder_input_embeddings = Embedding(input_dim = nb_words, output_dim = 300,weights = [embedding_matrix],name = 'decoder_emnedding_layer', trainable = True)(decoder_inputs)
+decoder_gru = GRU(300, name = 'decoder_gru', return_state = True,return_sequences = True)
+decoder_outputs = decoder_gru(decoder_input_embeddings)
+
+output = Dense(nb_words, activation = 'softmax', name = 'dense_layer')(decoder_outputs)
+model = Model(inputs = [encoder_inputs, decoder_inputs],outputs = output)
+
+
+save_model = ModelCheckpoint('model',monitor='val_loss', verbose=0, save_best_only=False, save_weights_only=False, mode='auto', period=1)
+model.compile(optimizer = 'rmsprop',loss='categorical_crossentropy', sample_weight_mode='temporal')
+
 #model visualization
 
 
